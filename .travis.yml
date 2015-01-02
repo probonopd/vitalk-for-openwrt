@@ -36,7 +36,7 @@ before_deploy:
 deploy:
   provider: releases
   api_key:
-    secure: jJBKTduvxWOc+0ANQJ3o+j+Pb71S2k2BbqqhyYvWZM40H8jW4euy4/NaLWYf5oNnF5YslmUtvK53m98sBpvu63sHNQ3vK/aoZEGMozFne76Z+PkgL3SZCr8ia/Un+IwEQ0C50FPGBa/osy583r2ajca0rKLlTN0M8zCTACCKm3w=
+    secure: WKeHZnM6xGb9J7mzLy+JyNT0vUi1dZ2VufXBjyhWAULU8TMlzUA1HTSwTplyMO/J6U68QkqDnvyIuR7sQ3/g2deVzuF0h5DnBKvEVMIpbinxnfNq8tiGShhGT1aVECFH3swdnDX6IlrW4CjlMkaJYFlmFkiSq2UjXmbVrbsssN8=
   skip_cleanup: true
   file_glob: true
   file: $TRAVIS_BUILD_DIR/*.ipk
