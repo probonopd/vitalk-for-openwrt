@@ -1,0 +1,12 @@
+diff -Naur a/Makefile b/Makefile
+--- a/Makefile	2015-01-02 20:45:48.279674995 +0100
++++ b/Makefile	2015-01-02 20:45:18.847669090 +0100
+@@ -1,7 +1,2 @@
+ vitalk: vitalk.c vito_io.c vito_io.h vito_parameter.c vito_parameter.h telnet.c telnet.h
+-	gcc -Wall -o vitalk \
+-	    vitalk.c vito_io.c vito_parameter.c telnet.c
+-
+-copy:
+-	scp *.c *.h Makefile *.sh root@heizung:Heizung/ViTalk/
+-
++	$(CC) -Wall -o vitalk vitalk.c vito_io.c vito_parameter.c telnet.c
