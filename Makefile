@@ -40,7 +40,10 @@ endef
 
 define Build/Prepare
 	$(call Build/Prepare/Default)
-	($(CP) ./patches $(PKG_BUILD_DIR); cd $(PKG_BUILD_DIR); patch -Np1 < ./patches/001-crosscompile.patch;);
+	$(CP) ./patches $(PKG_BUILD_DIR)/
+	cd $(PKG_BUILD_DIR)
+	patch -Np1 < ./patches/001-crosscompile.patch
+	cd -
 endef
 
 define Package/vitalk/install
