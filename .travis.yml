@@ -25,6 +25,7 @@ install:
 - mkdir package/$PACKAGE
 - ln -s $TRAVIS_BUILD_DIR/Makefile package/$PACKAGE/
 - ln -s $TRAVIS_BUILD_DIR/files package/$PACKAGE/
+- ln -s $TRAVIS_BUILD_DIR/patches package/$PACKAGE/
 script:
 - export STAGING_DIR=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/toolchain-*/bin)
 - export HOST=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/host/bin)
