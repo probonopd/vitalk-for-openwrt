@@ -28,7 +28,9 @@ install:
 script:
 - export STAGING_DIR=$TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/toolchain-*/bin # Otherwise patches fail?
 - export PATH=$TRAVIS_BUILD_DIR/local/usr/bin:$STAGING_DIR:$PATH # Otherwise patches fail?
-- quilt setup # Check if it is working
+- echo $PATH
+- find $STAGING_DIR
+- quilt setup || exit 1 # Check if it is working
 - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*
 - make V=s
 - find $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/bin/
