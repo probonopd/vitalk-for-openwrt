@@ -12,19 +12,7 @@ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 
 PKG_BUILD_PARALLEL:=1
 
-#PKG_BUILD_DEPENDS:= +libc
-
 include $(INCLUDE_DIR)/package.mk
-
-#CONFIGURE_ARGS+= \
-#	--with-alsa \
-#	--with-tinysvcmdns \
-#	--with-ssl=openssl
-
-#define Build/Configure
-#	(cd $(PKG_BUILD_DIR); autoreconf -i -f)
-#	$(call Build/Configure/Default, )
-#endef
 
 define Package/vitalk
   SECTION:=utils
@@ -39,11 +27,11 @@ define Package/vitalk/description
 endef
 
 define Build/Prepare
-	$(call Build/Prepare/Default)
 	$(CP) ./patches $(PKG_BUILD_DIR)/
 	cd $(PKG_BUILD_DIR)
 	patch -Np1 < ./patches/001-crosscompile.patch
 	cd -
+	$(call Build/Prepare/Default)
 endef
 
 define Package/vitalk/install
