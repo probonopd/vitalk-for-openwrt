@@ -31,8 +31,6 @@ script:
 - export PATH=$TRAVIS_BUILD_DIR/local/usr/bin:$HOST:$STAGING_DIR:$PATH
 - export QUILT_DIR=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/host/share/quilt)
 - sed -i -e "s|export QUILT_DIR|export QUILT_DIR=$QUILT_DIR|g" $HOST/quilt # Otherwise patches fail
-- cat $(which quilt)
-- quilt setup || exit 1 # Check if it is working
 - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*
 - make V=s
 - find $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/bin/
