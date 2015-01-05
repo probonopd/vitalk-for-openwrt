@@ -26,14 +26,12 @@ install:
 - ln -s $TRAVIS_BUILD_DIR/Makefile package/$PACKAGE/
 - ln -s $TRAVIS_BUILD_DIR/files package/$PACKAGE/
 script:
-- export STAGING_DIR=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/toolchain-*/bin) # Otherwise patches fail?
-- export HOST=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/host/bin) # Otherwise patches fail?
-- export PATH=$TRAVIS_BUILD_DIR/local/usr/bin:$HOST:$STAGING_DIR:$PATH # Otherwise patches fail?
-- find $STAGING_DIR/../share/quilt
-- export QUILT_DIR=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/toolchain-*/host/share/quilt)
-- sed -i -e "s|export QUILT_DIR|export QUILT_DIR=$QUILT_DIR|g" $HOST/quilt
-- cat $HOST/quilt
-- bash -x $(which quilt) setup # It looks like quilt does not find its commands; why?
+- export STAGING_DIR=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/toolchain-*/bin)
+- export HOST=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/host/bin)
+- export PATH=$TRAVIS_BUILD_DIR/local/usr/bin:$HOST:$STAGING_DIR:$PATH
+- export QUILT_DIR=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/host/share/quilt)
+- sed -i -e "s|export QUILT_DIR|export QUILT_DIR=$QUILT_DIR|g" $HOST/quilt # Otherwise patches fail
+- cat $(which quilt)
 - quilt setup || exit 1 # Check if it is working
 - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*
 - make V=s
