@@ -23,16 +23,14 @@ install:
 - tar xjf $FILE
 - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*
 - mkdir package/$PACKAGE
-- ln -s $TRAVIS_BUILD_DIR/Makefile package/$PACKAGE/
-- ln -s $TRAVIS_BUILD_DIR/files package/$PACKAGE/
-- ln -s $TRAVIS_BUILD_DIR/patches package/$PACKAGE/
+- cp -r $TRAVIS_BUILD_DIR/* package/$PACKAGE/ # Otherwise patches fail
 script:
 - export STAGING_DIR=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/toolchain-*/bin)
 - export HOST=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/host/bin)
 - export PATH=$TRAVIS_BUILD_DIR/local/usr/bin:$HOST:$STAGING_DIR:$PATH
 - export QUILT_DIR=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/host/share/quilt)
 - ls $QUILT_DIR
-- sed -i -e "s|export QUILT_DIR|export QUILT_DIR=$QUILT_DIR|g" $HOST/quilt # Otherwise patches fail
+- sed -i -e "s|export QUILT_DIR|export QUILT_DIR=$QUILT_DIR|g" $HOST/quilt # Otherwise patches fail (tbc)
 - bash -x $(which quilt) -h
 - quilt -h
 - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*
