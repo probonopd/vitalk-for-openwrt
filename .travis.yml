@@ -26,7 +26,8 @@ install:
 - ln -s $TRAVIS_BUILD_DIR/Makefile package/$PACKAGE/
 - ln -s $TRAVIS_BUILD_DIR/files package/$PACKAGE/
 script:
-- export PATH=$TRAVIS_BUILD_DIR/local/usr/bin:$PATH
+- export STAGING_DIR=$TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/toolchain-*/bin # Otherwise patches fail
+- export PATH=$TRAVIS_BUILD_DIR/local/usr/bin:$STAGING_DIR:$PATH # Otherwise patches fail
 - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*
 - make V=s
 - find $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/bin/
