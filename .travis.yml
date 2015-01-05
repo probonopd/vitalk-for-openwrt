@@ -31,6 +31,7 @@ script:
 - find $HOST/
 - export PATH=$TRAVIS_BUILD_DIR/local/usr/bin:$HOST:$STAGING_DIR:$PATH # Otherwise patches fail?
 - echo $PATH
+- /home/travis/build/probonopd/vitalk-for-openwrt/sdk/OpenWrt-SDK-ar71xx-for-linux-x86_64-gcc-4.8-linaro_uClibc-0.9.33.2/staging_dir/host/bin/quilt setup
 - quilt setup || exit 1 # Check if it is working
 - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*
 - make V=s
