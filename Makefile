@@ -38,6 +38,11 @@ define Package/vitalk/description
   Vitodens telnet Interface
 endef
 
+define Build/Prepare
+	$(call Build/Prepare/Default)
+	($(CP) ./patches $(PKG_BUILD_DIR); cd $(PKG_BUILD_DIR); patch -Np1 < ./patches/001-crosscompile.patch;);
+endef
+
 define Package/vitalk/install
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/vitalk $(1)/usr/bin/
