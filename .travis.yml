@@ -30,6 +30,9 @@ script:
 - export HOST=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/host) # Otherwise patches fail?
 - export PATH=$TRAVIS_BUILD_DIR/local/usr/bin:$HOST/bin:$STAGING_DIR:$PATH # Otherwise patches fail?
 - find $STAGING_DIR/../share/quilt
+- export QUILT_DIR=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/toolchain-*/host/share/quilt)
+- sed -i -e "s|export QUILT_DIR|export QUILT_DIR=$QUILT_DIR|g" $STAGING_DIR/quilt
+- cat $STAGING_DIR/quilt
 - bash -x $(which quilt) setup # It looks like quilt does not find its commands; why?
 - quilt setup || exit 1 # Check if it is working
 - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*
