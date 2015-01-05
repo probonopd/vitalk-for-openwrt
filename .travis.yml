@@ -27,11 +27,10 @@ install:
 - ln -s $TRAVIS_BUILD_DIR/files package/$PACKAGE/
 script:
 - export STAGING_DIR=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/toolchain-*/bin) # Otherwise patches fail?
-- export HOST=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/host/bin) # Otherwise patches fail?
-- find $HOST/
-- export PATH=$TRAVIS_BUILD_DIR/local/usr/bin:$HOST:$STAGING_DIR:$PATH # Otherwise patches fail?
-- echo $PATH
-- bash -x /home/travis/build/probonopd/vitalk-for-openwrt/sdk/OpenWrt-SDK-ar71xx-for-linux-x86_64-gcc-4.8-linaro_uClibc-0.9.33.2/staging_dir/host/bin/quilt setup
+- export HOST=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/host) # Otherwise patches fail?
+- export PATH=$TRAVIS_BUILD_DIR/local/usr/bin:$HOST/bin:$STAGING_DIR:$PATH # Otherwise patches fail?
+- find $STAGING_DIR/../share/quilt
+- bash -x $(which quilt) setup # It looks like quilt does not find its commands; why?
 - quilt setup || exit 1 # Check if it is working
 - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*
 - make V=s
