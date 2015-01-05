@@ -23,7 +23,7 @@ install:
 - tar xjf $FILE
 - cd $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*
 - mkdir package/$PACKAGE
-- cp -r $TRAVIS_BUILD_DIR/* package/$PACKAGE/ # Otherwise patches fail
+- cp -r $TRAVIS_BUILD_DIR/Makefile $TRAVIS_BUILD_DIR/files $TRAVIS_BUILD_DIR/patches package/$PACKAGE/ # Otherwise patches fail
 script:
 - export STAGING_DIR=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/toolchain-*/bin)
 - export HOST=$(readlink -e $TRAVIS_BUILD_DIR/sdk/OpenWrt-SDK-*/staging_dir/host/bin)
